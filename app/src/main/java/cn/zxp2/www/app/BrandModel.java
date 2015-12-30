@@ -61,13 +61,15 @@ public class BrandModel extends BaseModel {
         String url = "http://112.74.114.103/member/upload-logo";
         HashMap<String, String> params = new HashMap<>();
         params.put("ajax", "json");
-        params.put("ssid", "tlfrupflholjpe0n85h96ptgc3");
+        params.put("ssid", "hb3cm431v9f6lg2spf0338n7e3");
 
         List<File> files = new ArrayList<>();
-        File file = new File("/storage/emulated/0/UCDownloads/Screenshot/tmp/TMPSNAPSHOT1450804899586.jpg");
+        List<String> keys=new ArrayList<>();
+        File file = new File("/storage/emulated/0/immomo/mk/offline/1028/cdnst.momocdn.com/w/static/secure/login/img/icon_error_9cfbcd34.png");
         files.add(file);
+        keys.add("member[logo]");
 
-        requestDataByPostFormFiles(CODE_POST_FILE, url, null, params, files, onResponse);
+        requestDataByPostFormFiles(CODE_POST_FILE, url, null, params, keys, files, onResponse);
     }
 
 }

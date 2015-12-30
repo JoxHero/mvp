@@ -91,15 +91,16 @@ public class BaseModel {
      * @param url         url
      * @param headers     请求头
      * @param params      参数
+     * @param keys        键
      * @param files       文件
      * @param onResponse  回掉
      */
-    protected void requestDataByPostFormFiles (int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, List<File> files, OnResponse onResponse) {
+    protected void requestDataByPostFormFiles (int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, List<String> keys, List<File> files, OnResponse onResponse) {
         if (threatPostFormFiles != null) {
             threatPostFormFiles.interrupt();
             threatPostFormFiles = null;
         }
-        threatPostFormFiles = new CustomPostFormFilesThread(requestCode, url, headers, params, files, onResponse);
+        threatPostFormFiles = new CustomPostFormFilesThread(requestCode, url, headers, params,keys, files, onResponse);
         threatPostFormFiles.start();
     }
 
@@ -268,17 +269,19 @@ public class BaseModel {
         private String url;
         private HashMap<String, String> headers;
         private HashMap<String, String> params;
+        private List<String> keys;
         private List<File> files;
         private OnResponse onResponse;
 
         public CustomPostFormFilesThread () {
         }
 
-        public CustomPostFormFilesThread (int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, List<File> files, OnResponse onResponse) {
+        public CustomPostFormFilesThread (int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params,List<String> keys, List<File> files, OnResponse onResponse) {
             this.requestCode = requestCode;
             this.url = url;
             this.headers = headers;
             this.params = params;
+            this.keys = keys;
             this.files = files;
             this.onResponse = onResponse;
         }
@@ -296,7 +299,7 @@ public class BaseModel {
                 for (int i = 0; i < files.size(); i++) {
                     //切割图片的名称
                     String name = files.get(i).toString().substring(files.get(i).toString().lastIndexOf("/") + 1);
-                    postFormBuilder.addFile("member[logo]", name, files.get(i));
+                    postFormBuilder.addFile(keys.get(i), name, files.get(i));
                 }
             }
 

@@ -36,9 +36,9 @@ public class BrandPresenter extends BasePresenter {
     }
 
     //post文件
-//    public void postFile(){
-//        baseView.showDialog();
-//        brandModel.requestDataByPostFile(onResponse);
-//    }
+    public void postFile(){
+        baseView.showDialog();
+        brandModel.requestDataByPostFile(onResponse);
+    }
 
 }

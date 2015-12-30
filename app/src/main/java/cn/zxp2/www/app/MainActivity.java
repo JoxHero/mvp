@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity implements BaseView{
         pb= (ProgressBar) findViewById(R.id.pb);
 
         brandPresenter=new BrandPresenter(this);
-        brandPresenter.getBrandData("1","5");
-
+//        brandPresenter.getBrandData("1","5");
+        brandPresenter.postFile();
 
     }
 
@@ -47,11 +47,16 @@ public class MainActivity extends AppCompatActivity implements BaseView{
                 tv.setText(data);
                 KLog.json(data);
                 break;
+            case BrandModel.CODE_POST_FILE:
+                tv.setText(data);
+                KLog.json(data);
+                break;
         }
     }
 
     @Override
     public void fail(Request request, Exception e) {
-
+        KLog.json(request.toString());
+        KLog.json(e.toString());
     }
 }
