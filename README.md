@@ -77,8 +77,8 @@ public class BrandPresenter extends BasePresenter {
 public class MainActivity extends AppCompatActivity implements BaseView{
 
     TextView tv;
-    BrandPresenter brandPresenter;
     ProgressBar pb;
+    BrandPresenter brandPresenter;
 
 
     @Override
@@ -89,8 +89,7 @@ public class MainActivity extends AppCompatActivity implements BaseView{
         pb= (ProgressBar) findViewById(R.id.pb);
 
         brandPresenter=new BrandPresenter(this);
-        brandPresenter.getBrandData("1","5");
-
+        brandPresenter.getBrandData("1","5");//请求数据
 
     }
 
@@ -109,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements BaseView{
         switch (requestCode){
             case BrandModel.CODE_GET_BRAND:
                 tv.setText(data);
-                KLog.json(data);
                 break;
         }
     }
