@@ -35,7 +35,10 @@ downloadFile (int requestCode, String url, HashMap<String, String> headers, Hash
     params    ：请求参数
     file    ：文件
     files    ：多个文件
+    path    ：路径
+    fileName    ：文件名
     onResponse    ：回掉
+    
 
 例子：
 ----
