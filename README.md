@@ -4,7 +4,7 @@
 ----
 ###1.自定义model继承BaseModel
 ###2.自定义presenter继承BasePresenter
-###3.Fragment/Activity集成BaseView，重写四个方法：
+###3.Fragment/Activity继承BaseView，重写四个方法：
         showDialog()    ：显示进度条
         hideDialog()    ：隐藏进度条
         respense(int requestCode, String url, String data)    ：成功返回数据
