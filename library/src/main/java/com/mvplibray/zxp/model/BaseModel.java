@@ -68,19 +68,20 @@ public class BaseModel {
     }
 
     /**
-     * post提交文件file
      *
      * @param requestCode 请求码
-     * @param url         url
-     * @param file        文件
-     * @param onResponse  回掉
+     * @param url url
+     * @param headers 请求头
+     * @param params 请求参数
+     * @param file 文件
+     * @param onResponse 回掉
      */
-    protected void requestDataByPostFile (int requestCode, String url, File file, OnResponse onResponse) {
+    protected void requestDataByPostFile(int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, File file, OnResponse onResponse) {
         if (threatPostFile != null) {
             threatPostFile.interrupt();
             threatPostFile = null;
         }
-        threatPostFile = new CustomPostFileThread(requestCode, url, file, onResponse);
+        threatPostFile = new CustomPostFileThread(requestCode, url, headers, params, file, onResponse);
         threatPostFile.start();
     }
 
@@ -224,36 +225,50 @@ public class BaseModel {
 
         private int requestCode;
         private String url;
+        private HashMap<String, String> headers;
+        private HashMap<String, String> params;
         private File file;
         private OnResponse onResponse;
 
-        public CustomPostFileThread () {
+        public CustomPostFileThread() {
         }
 
-        public CustomPostFileThread (int requestCode, String url, File file, OnResponse onResponse) {
+        public CustomPostFileThread(int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, File file, OnResponse onResponse) {
             this.requestCode = requestCode;
             this.url = url;
+            this.headers = headers;
+            this.params = params;
             this.file = file;
             this.onResponse = onResponse;
         }
 
         @Override
-        public void run () {
+        public void run() {
             super.run();
+
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             PostFileBuilder postFileBuilder = OkHttpUtils.postFile();
 
             if (file != null) {
                 postFileBuilder.file(file);
             }
+            if (headers != null)
+                postFileBuilder.headers(headers);
+            if (params != null)
+                postFileBuilder.params(params);
 
             postFileBuilder.url(url).build().execute(new MyResultCallBack() {
                 @Override
-                public void onError (Request request, Exception e) {
+                public void onError(Request request, Exception e) {
                     onResponse.fail(request, e);
                 }
 
                 @Override
-                public void onResponse (String data) {
+                public void onResponse(String data) {
                     onResponse.success(requestCode, url, data);
                 }
             });
