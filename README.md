@@ -22,7 +22,7 @@ requestDataByPost (int requestCode, String url, HashMap<String, String> headers,
 requestDataByPostFormFiles (int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, List<String> keys, List<File> files, OnResponse onResponse)
 
 ###4.post上传文件
-requestDataByPostFile (int requestCode, String url, File file, OnResponse onResponse)
+requestDataByPostFile (int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, File file, OnResponse onResponse)
 
 ###5.get下载文件
 downloadFile (int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, String path, String fileName, OnResponse onResponse)
