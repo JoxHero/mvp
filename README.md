@@ -2,9 +2,9 @@
 ====
 使用方法：
 ----
-#1.自定义model继承BaseModel
-#2.自定义presenter继承BasePresenter
-#3.Fragment/Activity集成BaseView，重写四个方法：
+###1.自定义model继承BaseModel
+###2.自定义presenter继承BasePresenter
+###3.Fragment/Activity集成BaseView，重写四个方法：
         showDialog()    ：显示进度条
         hideDialog()    ：隐藏进度条
         respense(int requestCode, String url, String data)    ：成功返回数据
@@ -12,19 +12,19 @@
 
 请求方式：
 ----
-#1.get请求
+###1.get请求
 requestDataByGet (int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, OnResponse onResponse)
 
-#2.post请求
+###2.post请求
 requestDataByPost (int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, OnResponse onResponse)
 
-#3.post上传表单文件
+###3.post上传表单文件
 requestDataByPostFormFiles (int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, List<String> keys, List<File> files, OnResponse onResponse)
 
-#4.post上传文件
+###4.post上传文件
 requestDataByPostFile (int requestCode, String url, File file, OnResponse onResponse)
 
-#5.get下载文件
+###5.get下载文件
 downloadFile (int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, String path, String fileName, OnResponse onResponse)
 
 其中：
@@ -39,7 +39,7 @@ downloadFile (int requestCode, String url, HashMap<String, String> headers, Hash
 
 例子：
 ----
-#1.model
+###1.model
 public class BrandModel extends BaseModel {
 
     public static final int BASE_CODE = 100;
@@ -57,7 +57,7 @@ public class BrandModel extends BaseModel {
     }
 }
 
-#2.presenter
+###2.presenter
 public class BrandPresenter extends BasePresenter {
 
     BrandModel brandModel;
@@ -73,7 +73,7 @@ public class BrandPresenter extends BasePresenter {
     }
 }
 
-#3.Fragment/Activity
+###3.Fragment/Activity
 public class MainActivity extends AppCompatActivity implements BaseView{
 
     TextView tv;
