@@ -34,7 +34,7 @@ public class BasePresenter implements Presenter {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            baseView.respense(requestCode, url, data);
+                            baseView.response(requestCode, url, data);
                             baseView.hideDialog();
                         }
                     });

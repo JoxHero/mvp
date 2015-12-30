@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements BaseView{
     }
 
     @Override
-    public void respense(int requestCode, String url, String data) {
+    public void response(int requestCode, String url, String data) {
         switch (requestCode){
             case BrandModel.CODE_GET_BRAND:
                 tv.setText(data);

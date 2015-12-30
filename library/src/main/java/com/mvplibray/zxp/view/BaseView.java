@@ -12,7 +12,7 @@ public interface BaseView {
 
     void hideDialog();
 
-    void respense(int requestCode, String url, String data);
+    void response(int requestCode, String url, String data);
 
     void fail(Request request, Exception e);
 }
