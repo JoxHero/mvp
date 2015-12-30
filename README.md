@@ -1,0 +1,2 @@
+# mvp
+一个基于mvp和okhttp网络请求的的library,减少Fragment/Activity代码的臃肿
