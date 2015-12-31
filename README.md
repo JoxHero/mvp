@@ -13,34 +13,34 @@
 请求方式：
 ----
 ###1.get请求
-requestDataByGet (int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, OnResponse onResponse)
+requestDataByGet (requestCode, url, headers, params, onResponse)
 
 ###2.post请求
-requestDataByPost (int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, OnResponse onResponse)
+requestDataByPost (requestCode, url, headers, params, onResponse)
 
 ###3.post上传表单文件
-requestDataByPostFormFiles (int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, List<String> keys, List<File> files, OnResponse onResponse)
+requestDataByPostFormFiles (requestCode, url, headers, params, keys, files, onResponse)
 
 ###4.post上传文件
-requestDataByPostFile (int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, File file, OnResponse onResponse)
+requestDataByPostFile (requestCode, url, headers, params, file, onResponse)
 
 ###5.get下载文件
-downloadFile (int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, String path, String fileName, OnResponse onResponse)
+downloadFile (requestCode, url, headers, params, path, fileName, onResponse)
 
 ###6.post上传json字符串
-requestDataByPostJson(int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, String contentJson, OnResponse onResponse)
+requestDataByPostJson(requestCode, url, headers, params, contentJson, onResponse)
 
 其中：
 ----
-    requestCode    ：请求码
-    url    ：url
-    headers    ：请求头
-    params    ：请求参数
-    file    ：文件
-    files    ：多个文件
-    path    ：路径
-    fileName    ：文件名
-    onResponse    ：回掉
+    requestCode         ：请求码(int)
+    url                 ：url(String)
+    headers             ：请求头(HashMap)
+    params              ：请求参数(HashMap)
+    file                ：文件(File)
+    files               ：多个文件(List)
+    path                ：路径(String)
+    fileName            ：文件名(String)
+    onResponse          ：回掉
     
 
 例子：
