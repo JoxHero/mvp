@@ -1,4 +1,4 @@
-#基于mvp和okhttp网络请求的的library,减少Fragment/Activity代码的臃肿
+##基于mvp和okhttp网络请求,减少Fragment/Activity代码的臃肿
 ====
 使用方法：
 ----
