@@ -27,6 +27,9 @@ requestDataByPostFile (int requestCode, String url, HashMap<String, String> head
 ###5.get下载文件
 downloadFile (int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, String path, String fileName, OnResponse onResponse)
 
+###6.post上传json字符串
+requestDataByPostJson(int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, String contentJson, OnResponse onResponse)
+
 其中：
 ----
     requestCode    ：请求码
