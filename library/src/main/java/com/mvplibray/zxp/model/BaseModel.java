@@ -7,6 +7,7 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.GetBuilder;
 import com.zhy.http.okhttp.builder.PostFileBuilder;
 import com.zhy.http.okhttp.builder.PostFormBuilder;
+import com.zhy.http.okhttp.builder.PostStringBuilder;
 import com.zhy.http.okhttp.callback.FileCallBack;
 
 import java.io.File;
@@ -17,6 +18,7 @@ import java.util.List;
  * 基础model  所有的model继承这个（在项目中继承他的presenter按模块划分）
  * 2015.12.20加入get下载文件
  * 2015.12.24加入post提交表单形式数据，post提交文件
+ * 2015.12.29加入post提交json字符串
  * Created by zxp on 2015/12/20 0020.(相互学习，共同进步)
  */
 public class BaseModel {
@@ -25,6 +27,8 @@ public class BaseModel {
     protected CustomGetThread threadGet = null;
     //post方式提交params（统一封装任何post接口）
     protected CustomPostThread threatPost = null;
+    //post方式提交JSON字符串
+    protected CustomPostJsonThread threadPostJson = null;
     //post方式提交文件file
     protected CustomPostFileThread threatPostFile = null;
     //post方式提交表单形式文件file（统一封装任何post接口）
@@ -65,6 +69,24 @@ public class BaseModel {
         }
         threatPost = new CustomPostThread(requestCode, url, headers, params, onResponse);
         threatPost.start();
+    }
+
+    /**
+     * post方式提交json
+     * @param requestCode 请求码
+     * @param url url
+     * @param headers 请求头
+     * @param params 参数
+     * @param contentJson json字符串
+     * @param onResponse 回掉
+     */
+    protected void requestDataByPostJson(int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, String contentJson, OnResponse onResponse) {
+        if (threadPostJson != null) {
+            threadPostJson.interrupt();
+            threadPostJson = null;
+        }
+        threadPostJson = new CustomPostJsonThread(requestCode, url, headers, params, contentJson, onResponse);
+        threadPostJson.start();
     }
 
     /**
@@ -212,6 +234,55 @@ public class BaseModel {
 
                 @Override
                 public void onResponse (String data) {
+                    onResponse.success(requestCode, url, data);
+                }
+            });
+        }
+    }
+
+    /**
+     * Post方式提交Json格式字符串
+     */
+    protected class CustomPostJsonThread extends Thread {
+        private int requestCode;
+        private String url;
+        private HashMap<String, String> headers;
+        private HashMap<String, String> params;
+        private String contentJson;
+        private OnResponse onResponse;
+
+        public CustomPostJsonThread() {
+        }
+
+        public CustomPostJsonThread(int requestCode, String url, HashMap<String, String> headers, HashMap<String, String> params, String contentJson, OnResponse onResponse) {
+            this.requestCode = requestCode;
+            this.url = url;
+            this.headers = headers;
+            this.params = params;
+            this.contentJson = contentJson;
+            this.onResponse = onResponse;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            PostStringBuilder postStringBuilder = OkHttpUtils.postString();
+
+            if (headers != null)
+                postStringBuilder.headers(headers);
+            if (params != null)
+                postStringBuilder.params(params);
+            if (params != null)
+                postStringBuilder.content(contentJson);
+
+            postStringBuilder.url(url).build().execute(new MyResultCallBack() {
+                @Override
+                public void onError(Request request, Exception e) {
+                    onResponse.fail(request, e);
+                }
+
+                @Override
+                public void onResponse(String data) {
                     onResponse.success(requestCode, url, data);
                 }
             });

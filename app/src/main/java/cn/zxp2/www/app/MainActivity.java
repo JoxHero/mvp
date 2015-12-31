@@ -6,9 +6,14 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.mvplibray.zxp.okHttps.MyResultCallBack;
 import com.mvplibray.zxp.view.BaseView;
 import com.socks.library.KLog;
 import com.squareup.okhttp.Request;
+import com.zhy.http.okhttp.OkHttpUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements BaseView{
 
@@ -25,8 +30,9 @@ public class MainActivity extends AppCompatActivity implements BaseView{
         pb= (ProgressBar) findViewById(R.id.pb);
 
         brandPresenter=new BrandPresenter(this);
-//        brandPresenter.getBrandData("1","5");
-        brandPresenter.postFile();
+        brandPresenter.getBrandData("1","5");//get请求
+//        brandPresenter.downloadFile();//下载
+//        brandPresenter.postFile();//post上传文件
 
     }
 
